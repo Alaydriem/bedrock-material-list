@@ -1,0 +1,18 @@
+[package]
+name = "bedrock-material-list"
+version = "0.1.0"
+edition = "2021"
+authors = ["Charles R. Portwood II <charlesportwoodii@erianna.com>", "Alaydriem"]
+description = "Generates a materials list for a given Bedrock .mcstructure file."
+repository = "https://github.com/alaydriem/bedrock-material-list"
+license = "BSD-3-Clause"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+tokio = { version = "^1.11", features = ["full"] }
+clap = { version = "^3.2", features = ["derive", "env"] }
+serde = { version = "^1", features = ["derive"] }
+serde_json = { version = "^1", features = ["raw_value"] }
+colored = { version = "^2.0" }
+bedrock-hematite-nbt = { version = "^0.4.2" }
+snailquote = { version = "^0.3.1" }
