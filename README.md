@@ -26,7 +26,7 @@ This rust application does one simple thing - takes a .mcstructure file from Min
 
 ```
 cargo install bedrock-material-list
-edrock-material-list structure --file /path/to/file.mcstructure
+bedrock-material-list structure --file /path/to/file.mcstructure
 ```
 
 Or clone the repo, then run it with your .mcstructure file:
