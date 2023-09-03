@@ -8,11 +8,20 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::process::exit;
 
+#[derive(clap::ValueEnum, Debug, Clone)]
+pub enum OutputFormat {
+    Json,
+    Text
+}
+
 #[derive(Debug, Parser, Clone)]
 #[clap(author, version, about, long_about = None)]
 pub struct StructureConfig {
     #[clap(short, long)]
     pub file: String,
+
+    #[clap(long, value_enum, default_value_t=OutputFormat::Text)]
+    pub format: OutputFormat,
 }
 
 impl StructureConfig {
@@ -135,6 +144,7 @@ impl StructureConfig {
             "minecraft:air",
             "minecraft:stickyPistonArmCollision",
             "minecraft:pistonArmCollision",
+            "minecraft:structure_block"
         ];
         for block in unreal_blocks {
             if real_blocks.contains_key(block) {
@@ -142,16 +152,53 @@ impl StructureConfig {
             }
         }
 
-        match serde_json::to_string_pretty(&real_blocks) {
-            Ok(json) => println!("{}", json),
-            Err(error) => {
+        let block_map: HashMap::<String, String> = match std::fs::read_to_string("blocks.json") {
+            Ok(str) => match serde_json::from_str(&str) {
+                Ok(json) => json,
+                Err(err) => {
+                    println!(
+                        "{}",
+                        format!("Blocks.json missing {}", err.to_string())
+                            .bold()
+                            .red()
+                    );
+                    exit(1);
+                } 
+            }
+            Err(err) => {
                 println!(
                     "{}",
-                    format!("Unable to output materials list - {}", error)
+                    format!("Blocks.json missing {}", err.to_string())
                         .bold()
                         .red()
                 );
-                exit(1)
+                exit(1);
+            }
+        };
+
+        let mut output = HashMap::<String, i32>::new();
+        for (k, v) in &real_blocks {
+            let key = match block_map.get_key_value(k) {
+                Some((_, o_v)) => { o_v.to_owned() },
+                None => k.to_string()
+            };
+
+            output.insert(key, v.to_owned());
+        }
+
+        println!("{}: {}w x {}d x {}h", "Materials List", mcstructure.size[0], mcstructure.size[2], mcstructure.size[1]);
+        println!("------------------------\n");
+        match &self.format {
+            &OutputFormat::Json => {
+                match serde_json::to_string_pretty(&output) {
+                    Ok(text) => println!("{}", text),
+                    Err(_) => exit(1)
+                };
+            },
+            &OutputFormat::Text => {
+                for (k, v) in output {
+                    println!("    {}: {}", k, v);
+                }
             }
         }
     }

@@ -1,0 +1,14 @@
+{
+  "minecraft:sticky_piston_arm_collision": "Sticky Piston",
+  "minecraft:piston_arm_collision": "Piston",
+  "minecraft:powered_repeater": "Repeater",
+  "minecraft:unpowered_repeater": "Repeater",
+  "minecraft:lit_redstone_torch": "Redstone Torch",
+  "minecraft:unlit_redstone_torch": "Redstone Torch",
+  "minecraft:unpowered_comparator": "Comparator",
+  "minecraft:powered_comparator": "Comparator",
+  "minecraft:undyed_shulker_box": "Shulker Box",
+  "minecraft:sandstone:default": "Sandstone",
+  "minecraft:sandstone:smooth": "Smooth Sandstone",
+  "minecraft:wood_button": "Button"
+}

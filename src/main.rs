@@ -11,6 +11,9 @@ async fn main() {
     match &cfg.cmd {
         command::SubCommand::Structure(cmd) => {
             cmd.run(&cfg).await;
+        },
+        command::SubCommand::BlockGen(cmd) => {
+            cmd.run(&cfg).await;
         }
     }
 }
