@@ -10,5 +10,6 @@
   "minecraft:undyed_shulker_box": "Shulker Box",
   "minecraft:sandstone:default": "Sandstone",
   "minecraft:sandstone:smooth": "Smooth Sandstone",
-  "minecraft:wood_button": "Button"
+  "minecraft:wooden_button": "Button",
+  "minecraft:stone_block_slab2:smooth_sandstone": "Sandstone Slab"
 }
