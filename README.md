@@ -24,6 +24,10 @@ This rust application does one simple thing - takes a .mcstructure file from Min
 
 ## Usage
 
+Make sure you have the rust toolchain installed from: https://rustup.rs/
+
+Then install the package from cargo.
+
 ```
 cargo install bedrock-material-list
 bedrock-material-list structure --file /path/to/file.mcstructure
