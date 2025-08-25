@@ -145,6 +145,9 @@ impl StructureConfig {
             "minecraft:stickyPistonArmCollision",
             "minecraft:pistonArmCollision",
             "minecraft:structure_block",
+            "minecraft:command_block",
+            "minecraft:repeating_command_block",
+            "minecraft:chain_command_block"
         ];
         for block in unreal_blocks {
             if real_blocks.contains_key(block) {
@@ -174,8 +177,9 @@ impl StructureConfig {
                 Some((_, o_v)) => o_v.to_owned(),
                 None => k.to_string(),
             };
-
-            output.insert(key, v.to_owned());
+            // Sum counts for duplicate mapped names
+            let entry = output.entry(key).or_insert(0);
+            *entry += v;
         }
 
         println!(
